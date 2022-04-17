@@ -1,23 +1,25 @@
 import logo from './logo.svg';
 import './App.css';
+import MostWantedList from './MostWantedList'
 
 function App() {
+
+  async function loadList() {
+
+    const apiUrl = 'https://api.fbi.gov/wanted/v1/list';
+
+    let result = await fetch(apiUrl);
+    let list = await result.json();
+
+    console.log(list);
+
+  }
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <MostWantedList/>
+      <button onClick={loadList}>Load bad guys</button>
     </div>
   );
 }
